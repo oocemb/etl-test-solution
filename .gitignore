@@ -12,7 +12,7 @@ webdav_yandex_disk/
 .idea/
 __pycache__/
 # User-defined
-.env
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
