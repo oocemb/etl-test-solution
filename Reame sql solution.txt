@@ -1,0 +1,11 @@
+Reame sql solution
+
+chardetect dump.sql
+iconv -f WINDOWS-1251 -t utf-8  dump.sql > out.sql
+sed -i 's/Mосква/Москва/g' out.sql
+sed -i 's/Cанкт-Петербург/Санкт-Петербург/g' out.sql
+sed -i 's/Cевастополь/Севастополь/g' out.sql
+rm dump.sql
+docker run --name test-pg -p 5432:5432 -v <path_to_sql_dump>/sql:/docker-entrypoint-initdb.d -e POSTGRES_PASSWORD=admin -d postgres:14.2
+docker exec -i test-pg psql -U postgres < <path_to_sql_script>/test_script.sql
+docker cp test-pg:/tmp/goal_test.csv ~/<path_to_compare_folder>/goal_test.csv
